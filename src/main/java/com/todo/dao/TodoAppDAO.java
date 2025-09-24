@@ -13,6 +13,7 @@ public class TodoAppDAO {
     private static final String SELECT_TODO_BY_ID = "SELECT * FROM todos WHERE id = ?";
     private static final String UPDATE_TODO = "UPDATE todos SET title = ?, description = ?, completed = ?, updated_at = ? WHERE id = ?";
     private  static final String DELETE_TODO = "DELETE FROM todos WHERE id = ?";
+    private static final String FILTER_TODOS = "SELECT * FROM todos WHERE completed = ?";
     // Create a New Todo
     public int createtodo(Todo todo) throws SQLException {
         try (
@@ -89,7 +90,7 @@ public class TodoAppDAO {
     public Todo getTodoById(int id) throws SQLException {
         try (
                 Connection conn = DatabaseConnection.getDBConnection();
-                PreparedStatement stmt = conn.prepareStatement(SELECT_TODO_BY_ID)
+                PreparedStatement stmt = conn.prepareStatement(SELECT_TODO_BY_ID);
         ) {
             stmt.setInt(1, id);
             try (ResultSet res = stmt.executeQuery()) {
@@ -99,5 +100,20 @@ public class TodoAppDAO {
             }
         }
         return null;
+    }
+    public List<Todo> filterTodos(boolean  status) throws SQLException {
+        List<Todo> todos = new ArrayList<>();
+        try(
+            Connection conn  = DatabaseConnection.getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(FILTER_TODOS);
+        ){
+            stmt.setBoolean(1,status);
+            try(ResultSet res = stmt.executeQuery()){
+                while(res.next()){
+                    todos.add(getTodoRow(res));
+                }            
+            }
+        }
+        return todos;
     }
 }

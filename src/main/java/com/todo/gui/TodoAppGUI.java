@@ -66,7 +66,6 @@ public class TodoAppGUI extends JFrame {
         deleteButton = new JButton("Delete");
         editButton = new JButton("Edit");
         refreshButton = new JButton("Refresh");
-
         // Filter dropdown
         String[] categoryOptions = {"All", "Completed", "Pending"};
         categoryComboBox = new JComboBox<>(categoryOptions);
@@ -127,8 +126,7 @@ public class TodoAppGUI extends JFrame {
         editButton.addActionListener(e -> updateTodo());
         deleteButton.addActionListener(e -> deleteTodo());
         refreshButton.addActionListener(e -> refreshTodo());
-
-        // ✅ Add this listener
+        categoryComboBox.addActionListener(e -> filterTodo());
         todoTable.getSelectionModel().addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
                 loadSelectedTodo();
@@ -231,6 +229,38 @@ public class TodoAppGUI extends JFrame {
             tableModel.addRow(row);
         }
     }
+    private void filterTodo()
+    {
+        String categoryStatus = (String)categoryComboBox.getSelectedItem();
+        if(categoryStatus.equals("All"))
+        {
+            loadTodos();
+        }
+        else{
+            if(categoryStatus.equals("Completed")){
+                try {
+                    List<Todo> todos = todoAppDAO.filterTodos(true);
+                    updateTable(todos);
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error loading todos: " + e.getMessage(),
+                            "Database Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+            }
+            else{
+                try {
+                    List<Todo> todos = todoAppDAO.filterTodos(false);
+                    updateTable(todos);
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error loading todos: " + e.getMessage(),
+                            "Database Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+            }
+                
+        }
+    }
+
     private void loadSelectedTodo(){
         int row  = todoTable.getSelectedRow();
         if(row >= 0){
