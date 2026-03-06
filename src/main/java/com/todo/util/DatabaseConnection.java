@@ -11,7 +11,7 @@ public class DatabaseConnection {
     public  static final String password = "Hsenid@S123s";
     static {
         try {
-            Class.forName(driver);
+            Use DriverManager.getConnection(url, username, password) instead of loading the driver explicitly.
         } catch (ClassNotFoundException e) {
             System.out.println("Driver not found");
         }
