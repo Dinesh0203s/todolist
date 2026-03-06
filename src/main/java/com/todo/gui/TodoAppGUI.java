@@ -217,8 +217,7 @@ public class TodoAppGUI extends JFrame {
             List<Todo> todos = todoAppDAO.getAllTodos();
             updateTable(todos);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error loading todos: " + e.getMessage(),
-                    "Database Error", JOptionPane.ERROR_MESSAGE);
+            Log the error and display a generic error message to the user, e.g., "An error occurred while loading todos. Please try again later."
             e.printStackTrace();
         }
     }
