@@ -10,6 +10,7 @@ public class TodoAppDAO {
 
     private static final String SELECT_ALL_TODOS = "SELECT * FROM todos ORDER BY created_at DESC";
     private static final String INSERT_TODO = "INSERT INTO todos (title, description, completed, created_at, updated_at) VALUES (?, ?, ?, ?, ?)";
+// Ensure all user-input data is properly sanitized and parameterized
     private static final String SELECT_TODO_BY_ID = "SELECT * FROM todos WHERE id = ?";
     private static final String UPDATE_TODO = "UPDATE todos SET title = ?, description = ?, completed = ?, updated_at = ? WHERE id = ?";
     private  static final String DELETE_TODO = "DELETE FROM todos WHERE id = ?";
