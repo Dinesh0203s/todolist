@@ -8,7 +8,7 @@ import com.todo.util.DatabaseConnection;
 
 public class TodoAppDAO {
 
-    private static final String SELECT_ALL_TODOS = "SELECT * FROM todos ORDER BY created_at DESC";
+    Use a query builder or an ORM to generate SQL queries.
     private static final String INSERT_TODO = "INSERT INTO todos (title, description, completed, created_at, updated_at) VALUES (?, ?, ?, ?, ?)";
     private static final String SELECT_TODO_BY_ID = "SELECT * FROM todos WHERE id = ?";
     private static final String UPDATE_TODO = "UPDATE todos SET title = ?, description = ?, completed = ?, updated_at = ? WHERE id = ?";
