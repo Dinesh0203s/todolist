@@ -17,6 +17,6 @@ public class DatabaseConnection {
         }
     }
     public static Connection getDBConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+        Use a secure connection string, such as "jdbc:mysql://localhost:3306/todo?useSSL=true&requireSSL=true"
     }
 }
