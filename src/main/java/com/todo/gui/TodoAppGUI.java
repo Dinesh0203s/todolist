@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+Use parameterized queries, e.g., "SELECT * FROM users WHERE username = ? AND password = ?"
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
